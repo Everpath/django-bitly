@@ -82,6 +82,9 @@ class BittleManager(models.Manager):
             # These can be used with only one forward slash
             # Treat these as ready-to-go
             url = obj_url
+        elif re.search(r'(localhost(:[0-9]+)?)/', obj_url, re.IGNORECASE):
+            # Localhost cannot be shortened?
+            raise BittleException("URLs on localhost cannot be shortened: %s" % obj_url)
         elif re.match(r'^[^:/]+://', obj_url, re.IGNORECASE):
             # These are meant to be used with double-forward-slashes
             # Treat these as ready-to-go
