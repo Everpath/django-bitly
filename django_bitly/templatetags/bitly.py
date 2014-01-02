@@ -23,6 +23,8 @@ def bitlify(value):
             url = value.get_absolute_url
         return url
     except (BittleException, Bittle.DoesNotExist):
+        if isinstance(value, basestring):
+            return value
         return value.get_absolute_url()
 
 
